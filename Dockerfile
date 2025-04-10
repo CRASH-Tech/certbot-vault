@@ -28,6 +28,6 @@ RUN chmod -R a+x /usr/local/bin
 RUN mkdir /app
 WORKDIR /app
 COPY ./renew.sh /app/renew.sh
-RUN chmoa a+x /app/renew.sh
+RUN chmod a+x /app/renew.sh
 
 ENTRYPOINT /app/renew.sh
