@@ -24,8 +24,8 @@ PRIMARY_DOMAIN="${DOMAIN_ARRAY[0]}"
 while true; do
     # === Loop through each domain ===
     for DOMAIN in "${DOMAIN_ARRAY[@]}"; do
-        echo "🔧 Processing domain: $DOMAIN"
         DOMAIN=$(echo "$DOMAIN" | xargs)
+        echo "🔧 Processing domain: $DOMAIN"
         CERT_DIR="./config/live/$DOMAIN"
 
         # === Obtain certificate ===
