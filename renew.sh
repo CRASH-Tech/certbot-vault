@@ -3,12 +3,12 @@
 set -e
 
 # === CREATE DIRS ===
-mkdir .config
-mkdir .logs
-mkdir .work
+mkdir -p ./config
+mkdir -p ./logs
+mkdir -p ./work
 
 # === CREATE CONFIG ===
-cat <<EOF >.config.ini
+cat <<EOF >config.ini
 dns_rfc2136_server = $RFC2136_SERVER
 dns_rfc2136_port = $RFC2136_PORT
 dns_rfc2136_name = $RFC2136_NAME
@@ -26,7 +26,7 @@ while true; do
     for DOMAIN in "${DOMAIN_ARRAY[@]}"; do
         echo "🔧 Processing domain: $DOMAIN"
         DOMAIN=$(echo "$DOMAIN" | xargs)
-        CERT_DIR=".config/live/$DOMAIN"
+        CERT_DIR="./config/live/$DOMAIN"
 
         # === Obtain certificate ===
         certbot certonly \
@@ -34,11 +34,11 @@ while true; do
             --agree-tos \
             --email "$EMAIL" \
             --dns-rfc2136 \
-            --dns-rfc2136-credentials .config.ini \
+            --dns-rfc2136-credentials ./config.ini \
             --dns-rfc2136-propagation-seconds $PROPAGATION_SECONDS \
-            --logs-dir .logs \
-            --work-dir .work \
-            --config-dir .config \
+            --logs-dir ./logs \
+            --work-dir ./work \
+            --config-dir ./config \
             $CERTBOT_ARGS \
             -d "$DOMAIN" \
             -d "*.$DOMAIN"
